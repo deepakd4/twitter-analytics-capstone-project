@@ -8,7 +8,7 @@ This a data engineering project that uses some tools in big data engineering spa
 This data pipeline collects data from twitter api, publish it to a kafka topic. Two consumers, an Elasticsearch search service and a PostgresSQL service consume from this Kafka Topic.
 The data is indexed in Elasticsearch and visualized in Kibana.
 
-[Twitter Analytics Pipeline](./Real%20Time%20Tweets%20Analytics.jpg)
+![alt text](https://github.com/deepakd4/twitter-analytics-capstone-project/blob/main/Real%20Time%20Tweets%20Analytics.jpg?raw=true)
 
 
 
