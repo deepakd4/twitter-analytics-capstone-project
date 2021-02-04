@@ -1,0 +1,6 @@
+requests==2.25.1
+kafka-python==2.0.2
+tweepy==3.10.0
+simplejson==3.17.2
+configparser==5.0.1
+elasticsearch==7.10.1
