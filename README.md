@@ -18,3 +18,11 @@ A python library called Tweepy <https://www.tweepy.org/> is used to interact wit
 
 ### Apache Kafka
 A kafka topic called twitter-tweets is created. Currently there is just 1 partition for this topic. All the configuration for this topic are default. 
+
+
+### Elasticsearch
+An elasticsearch index called twitter-tweets stores the documents with information abouot tweet author, tweet created timestamp and tweet text.
+
+
+### Kibana
+Elasticsearch and Kibana are tightly coupled. We can easily visualize the data stored in elasticsearch. 
