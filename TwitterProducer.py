@@ -5,8 +5,7 @@ from kafka import KafkaProducer
 import json
 import logging
 import configparser
-from datetime import datetime
-from datetime import timezone
+
 
 config = configparser.RawConfigParser()
 config.read('config.cfg')
@@ -21,10 +20,11 @@ KAFKA_TOPIC = config.get('Kafka', 'topic')
 
 
 class TwitterProducer(StreamListener):
+    def __init__(self):
+        self.producer = self.create_kafka_producer()
 
     def on_data(self, data):
-        producer = self.create_kafka_producer()
-        producer.send(KAFKA_TOPIC, key=None, value=data).add_callback(self.on_send_success).add_errback(
+        self.producer.send(KAFKA_TOPIC, key=None, value=data).add_callback(self.on_send_success).add_errback(
             self.on_send_error)
         print(data)
         return True
@@ -38,9 +38,9 @@ class TwitterProducer(StreamListener):
         return producer
 
     def on_send_success(self, record_metadata):
-        print(record_metadata.topic)
-        print(record_metadata.partition)
-        print(record_metadata.offset)
+        print("TOPIC : " + record_metadata)
+        print("PARTITION : " + record_metadata)
+        print("OFFSET : " + record_metadata.offset)
 
     def on_send_error(self, excp):
         logging.error('error in sending message to kafka topic', exc_info=excp)

@@ -1,19 +1,19 @@
 from elasticsearch import Elasticsearch
 from kafka import KafkaConsumer
 import json
+import configparser
+
+
+config = configparser.RawConfigParser()
+config.read('config.cfg')
 
 es = Elasticsearch(hosts=['localhost'], port=9200)
-
+KAFKA_TOPIC = config.get('Kafka', 'topic')
 
 def main():
 
-    """
-    main function initiates a kafka consumer, initialize the tweet database.
-    Consumer consumes tweets from producer extracts features, cleanses the tweet text,
-    calculates sentiments and loads the data into postgres database
-    """
-
-    consumer = KafkaConsumer("twitter_tweets", value_deserializer=lambda m: json.loads(m.decode('ascii')), auto_offset_reset='earliest')
+    consumer = KafkaConsumer(KAFKA_TOPIC, value_deserializer=lambda m: json.loads(m.decode('ascii')),
+                             auto_offset_reset='earliest')
 
     for msg in consumer:
         print(type(msg))
